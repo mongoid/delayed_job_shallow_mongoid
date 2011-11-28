@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "delayed_job_shallow_mongoid"
   gem.homepage = "http://github.com/jaghion/delayed_job_shallow_mongoid"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{More efficient Mongoid document serialization for delayed_job.}
+  gem.description = %Q{When the object or arg to a delayed_job is a Mongoid document, store only a small stub of the object instead of the full serialization.}
   gem.email = "joey@aghion.com"
   gem.authors = ["Joey Aghion"]
   # dependencies defined in Gemfile
