@@ -13,5 +13,13 @@ module Delayed
     rescue Mongoid::Errors::DocumentNotFound
       true  # do nothing if document has been removed
     end
+    
+    def display_name
+      if object.is_a?(ShallowMongoid::DocumentStub)
+        return "#{object.klass}[#{object.id}]##{method_name}"
+      else
+        "#{object.class}##{method_name}"
+      end
+    end
   end
 end

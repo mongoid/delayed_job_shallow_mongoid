@@ -48,6 +48,17 @@ describe ::Delayed::PerformableMethod do
       @method.perform.should be_true
     end
   end
+  
+  context "display_name" do
+    it "should return underlying class when a stub is being used" do
+      @method = ::Delayed::PerformableMethod.new(@model, :to_s, [])
+      @method.display_name.should == "TestModel[#{@model._id}]#to_s"
+    end
+    it "should return usual name when no stub is involved" do
+      @method = ::Delayed::PerformableMethod.new(:test, :to_s, [])
+      @method.display_name.should == "Symbol#to_s"
+    end
+  end
 end
 
 describe ::Delayed::PerformableMailer do
