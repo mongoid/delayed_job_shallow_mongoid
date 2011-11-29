@@ -4,7 +4,8 @@ source "http://rubygems.org"
 #   gem "activesupport", ">= 2.3.5"
 
 gem 'actionmailer'
-gem "delayed_job_mongoid", :git => "https://github.com/collectiveidea/delayed_job_mongoid.git"
+gem "delayed_job", "~> 2.1.4"
+gem "delayed_job_mongoid", "~> 1.0.4"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
