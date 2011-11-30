@@ -3,7 +3,8 @@ source "http://rubygems.org"
 # Example:
 #   gem "activesupport", ">= 2.3.5"
 
-gem "delayed_job_mongoid", ">= 1.0.4"
+gem "delayed_job", "~> 2.1.1"
+gem "mongoid", "~> 2.0.2"
 
 # Add dependencies to develop your gem here.
 # Include everything needed to run rake, tests, features, etc.
