@@ -61,13 +61,13 @@ describe ::Delayed::PerformableMethod do
       end
       it "should store the selector" do
         @method = ::Delayed::PerformableMethod.new(@child, :to_s, [])
-        @method.object.selector.should == ["child_models", ["[]", 0]]
+        @method.object.selector.should == ['child_models', ['find', @child._id.to_s]]
       end
       it "should store the deeply nested selector" do
         @grandchild = GrandchildModel.new(:_id => ::BSON::ObjectId.new)
         @model.child_models.first.grandchild_models << @grandchild
         @method = ::Delayed::PerformableMethod.new(@grandchild, :to_s, [])
-        @method.object.selector.should == ["child_models", ["[]", 0], "grandchild_models", ["[]", 0]]
+        @method.object.selector.should == ['child_models', ['find', @child._id.to_s], 'grandchild_models', ['find', @grandchild._id.to_s]]
       end
       
     end
@@ -107,7 +107,7 @@ describe ::Delayed::PerformableMethod do
       child = ChildModel.new(:_id => ::BSON::ObjectId.new)
       @model.child_models << child
       method = ::Delayed::PerformableMethod.new(child, :to_s, [])
-      method.display_name.should == "TestModel[#{@model._id}].child_models[0]#to_s"
+      method.display_name.should == "TestModel[#{@model._id}].child_models.find(\"#{child._id}\")#to_s"
     end
   end
 end

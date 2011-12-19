@@ -3,7 +3,7 @@ module Delayed
     def self.dump(arg)
       return arg unless arg.is_a?(::Mongoid::Document)
       if arg.embedded?
-        ShallowMongoid::DocumentStub.new(arg._root.class, arg._root._id.to_s, selector_from(arg._path))
+        ShallowMongoid::DocumentStub.new(arg._root.class, arg._root._id.to_s, selector_from(arg))
       else
         ShallowMongoid::DocumentStub.new(arg.class, arg._id.to_s)
       end
@@ -17,12 +17,15 @@ module Delayed
       end
       result
     end
-    
-    # E.g., "images.0.width"  =>  ["images", ["[]", 0], "width"]
-    def self.selector_from(path)
+  
+    # The chain of relations allowing us to locate an embedded document.
+    # E.g., ['images', ['find', '4eef..678'], 'width']
+    def self.selector_from(doc)
       [].tap do |selector|
-        path.split('.').each do |message|
-          selector << message =~ /^0-9+$/ ? ["[]", message.to_i] : message
+        while doc._parent do
+          selector.unshift ['find', doc._id.to_s] if doc.metadata.macro == :embeds_many
+          selector.unshift doc.metadata.key
+          doc = doc._parent
         end
       end
     end
