@@ -2,6 +2,12 @@ require 'spec_helper'
 
 class TestModel
   include ::Mongoid::Document
+  embeds_many :child_models
+end
+
+class ChildModel
+  include ::Mongoid::Document
+  embedded_in :test_model, inverse_of: :child_models
 end
 
 describe Delayed::ShallowMongoid::DocumentStub do
@@ -31,6 +37,12 @@ describe ::Delayed::PerformableMethod do
       method = ::Delayed::PerformableMethod.new('test', :lines, [@model])
       method.args.first.should be_a_kind_of(Delayed::ShallowMongoid::DocumentStub)
       method.args.first.id.should == @model._id.to_s
+    end
+    it "should not transform embedded document into shallow version" do
+      child = ChildModel.new
+      @model.child_models << child
+      method = ::Delayed::PerformableMethod.new(child, :to_s, [])
+      method.object.should_not be_a_kind_of(Delayed::ShallowMongoid::DocumentStub)
     end
   end
 

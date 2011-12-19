@@ -1,7 +1,7 @@
 module Delayed
   module ShallowMongoid
     def self.dump(arg)
-      if arg.is_a?(::Mongoid::Document)
+      if arg.is_a?(::Mongoid::Document) && !arg.embedded?
         ShallowMongoid::DocumentStub.new(arg.class, arg._id.to_s)
       else
         arg
