@@ -16,7 +16,7 @@ module Delayed
     
     def display_name
       if object.is_a?(ShallowMongoid::DocumentStub)
-        return "#{object.klass}[#{object.id}]##{method_name}"
+        "#{object.description}##{method_name}"
       else
         "#{object.class}##{method_name}"
       end
