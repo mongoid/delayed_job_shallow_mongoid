@@ -49,6 +49,15 @@ describe ::Delayed::PerformableMethod do
     end
 
     context 'when saving job' do
+      context 'when jobs are run immediately' do
+        before { ::Delayed::Worker.delay_jobs = false }
+        after { ::Delayed::Worker.delay_jobs = true }
+        it "should not transform if there are pending changes and jobs are run immediately" do
+          @model.title = "updated"
+          method = ::Delayed::PerformableMethod.new(@model, :to_s, [])
+          method.object.should_not be_a_kind_of(Delayed::ShallowMongoid::DocumentStub)
+        end
+      end
       it "should transform object into shallow version" do
         method = ::Delayed::PerformableMethod.new(@model, :to_s, [])
         method.object.should be_a_kind_of(Delayed::ShallowMongoid::DocumentStub)

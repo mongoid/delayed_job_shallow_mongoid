@@ -2,6 +2,7 @@ module Delayed
   module ShallowMongoid
     def self.dump(arg)
       return arg unless arg.is_a?(::Mongoid::Document) && arg.persisted?
+      return arg if arg._updates.any? && !Delayed::Worker.delay_jobs
       if arg.embedded?
         ShallowMongoid::DocumentStub.new(arg._root.class, arg._root._id.to_s, selector_from(arg))
       else
