@@ -23,6 +23,7 @@ GEM
       multi_json (~> 1.0)
     archive-tar-minitar (0.5.2)
     bson (1.5.1)
+    bson_ext (1.5.1)
     builder (3.0.0)
     columnize (0.3.5)
     daemons (1.1.4)
@@ -95,10 +96,11 @@ PLATFORMS
 
 DEPENDENCIES
   actionmailer
+  bson_ext (~> 1.5)
   bundler (~> 1.0.0)
   delayed_job (~> 2.1.1)
   jeweler (~> 1.6.4)
-  mongoid (~> 2.0.2)
+  mongoid (~> 2.0)
   rspec
   ruby-debug19
   shoulda
