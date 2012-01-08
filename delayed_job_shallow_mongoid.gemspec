@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Joey Aghion"]
-  s.date = "2012-01-04"
+  s.date = "2012-01-06"
   s.description = "When the object or arg to a delayed_job is a Mongoid document, store only a small stub of the object instead of the full serialization."
   s.email = "joey@aghion.com"
   s.extra_rdoc_files = [
@@ -44,32 +44,35 @@ Gem::Specification.new do |s|
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
       s.add_runtime_dependency(%q<delayed_job>, ["~> 2.1.1"])
-      s.add_runtime_dependency(%q<mongoid>, ["~> 2.0.2"])
+      s.add_runtime_dependency(%q<mongoid>, ["~> 2.0"])
       s.add_development_dependency(%q<actionmailer>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<ruby-debug19>, [">= 0"])
+      s.add_development_dependency(%q<bson_ext>, ["~> 1.5"])
     else
       s.add_dependency(%q<delayed_job>, ["~> 2.1.1"])
-      s.add_dependency(%q<mongoid>, ["~> 2.0.2"])
+      s.add_dependency(%q<mongoid>, ["~> 2.0"])
       s.add_dependency(%q<actionmailer>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, ["~> 1.0.0"])
       s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<ruby-debug19>, [">= 0"])
+      s.add_dependency(%q<bson_ext>, ["~> 1.5"])
     end
   else
     s.add_dependency(%q<delayed_job>, ["~> 2.1.1"])
-    s.add_dependency(%q<mongoid>, ["~> 2.0.2"])
+    s.add_dependency(%q<mongoid>, ["~> 2.0"])
     s.add_dependency(%q<actionmailer>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, ["~> 1.0.0"])
     s.add_dependency(%q<jeweler>, ["~> 1.6.4"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<ruby-debug19>, [">= 0"])
+    s.add_dependency(%q<bson_ext>, ["~> 1.5"])
   end
 end
 
