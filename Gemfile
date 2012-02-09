@@ -1,6 +1,6 @@
 source "http://rubygems.org"
 
-gem "delayed_job", "~> 2.1.1"
+gem "delayed_job", ">= 2.1.1"
 gem "mongoid", "~> 2.0"
 
 group :development do
