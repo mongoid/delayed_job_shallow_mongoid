@@ -16,7 +16,7 @@ require 'jeweler'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "delayed_job_shallow_mongoid"
-  gem.homepage = "http://github.com/jaghion/delayed_job_shallow_mongoid"
+  gem.homepage = "http://github.com/joeyAghion/delayed_job_shallow_mongoid"
   gem.license = "MIT"
   gem.summary = %Q{More efficient Mongoid document serialization for delayed_job.}
   gem.description = %Q{When the object or arg to a delayed_job is a Mongoid document, store only a small stub of the object instead of the full serialization.}
