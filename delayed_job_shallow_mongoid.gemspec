@@ -45,7 +45,6 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<mongoid>, ["~> 3.0"])
       s.add_development_dependency(%q<actionmailer>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
-      s.add_development_dependency(%q<bundler>, ["~> 1.2"])
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<ruby-debug19>, [">= 0"])
     else
@@ -53,7 +52,6 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<mongoid>, ["~> 3.0"])
       s.add_dependency(%q<actionmailer>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
-      s.add_dependency(%q<bundler>, ["~> 1.2"])
       s.add_dependency(%q<rspec>, [">= 0"])
       s.add_dependency(%q<ruby-debug19>, [">= 0"])
     end
@@ -62,7 +60,6 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<mongoid>, ["~> 3.0"])
     s.add_dependency(%q<actionmailer>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
-    s.add_dependency(%q<bundler>, ["~> 1.2"])
     s.add_dependency(%q<rspec>, [">= 0"])
     s.add_dependency(%q<ruby-debug19>, [">= 0"])
   end
