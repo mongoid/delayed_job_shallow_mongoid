@@ -7,7 +7,7 @@ group :development do
   gem "actionmailer"
   gem "shoulda", ">= 0"
   gem "bundler", "~> 1.2"
-  gem "jeweler", "~> 1.6.4"
+  gem "jeweler", "~> 1.8"
   gem "rspec"
   gem "ruby-debug19"
 end
