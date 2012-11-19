@@ -12,20 +12,6 @@ end
 require 'rake'
 require 'rspec/core/rake_task'
 
-require 'jeweler'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "delayed_job_shallow_mongoid"
-  gem.homepage = "http://github.com/joeyAghion/delayed_job_shallow_mongoid"
-  gem.license = "MIT"
-  gem.summary = %Q{More efficient Mongoid document serialization for delayed_job.}
-  gem.description = %Q{When the object or arg to a delayed_job is a Mongoid document, store only a small stub of the object instead of the full serialization.}
-  gem.email = "joey@aghion.com"
-  gem.authors = ["Joey Aghion"]
-  # dependencies defined in Gemfile
-end
-Jeweler::RubygemsDotOrgTasks.new
-
 desc "Run all tests"
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = "spec/**/*_spec.rb"
