@@ -45,7 +45,7 @@ describe ::Delayed::PerformableMethod do
 
   context "with a saved document" do
     before(:each) do
-      @model = TestModel.create #new(:_id => ::BSON::ObjectId.new)
+      @model = TestModel.create #new(:_id => Moped::BSON::ObjectId.new)
     end
 
     context 'when saving job' do
@@ -70,7 +70,7 @@ describe ::Delayed::PerformableMethod do
       end
       context "with an embedded document" do
         before(:each) do
-          @child = ChildModel.new(:_id => ::BSON::ObjectId.new)
+          @child = ChildModel.new(:_id => Moped::BSON::ObjectId.new)
           @model.child_models.push @child
         end
         after(:each) do
@@ -83,7 +83,7 @@ describe ::Delayed::PerformableMethod do
           @method.object.selector.should == ['child_models', ['find', @child._id.to_s]]
         end
         it "should store the deeply nested selector" do
-          @grandchild = GrandchildModel.new(:_id => ::BSON::ObjectId.new)
+          @grandchild = GrandchildModel.new(:_id => Moped::BSON::ObjectId.new)
           @model.child_models.first.grandchild_models.push @grandchild
           @method = ::Delayed::PerformableMethod.new(@grandchild, :to_s, [])
           @method.object.selector.should == ['child_models', ['find', @child._id.to_s], 'grandchild_models', ['find', @grandchild._id.to_s]]
@@ -99,19 +99,25 @@ describe ::Delayed::PerformableMethod do
       end
       it "should do nothing if document not found" do
         method = ::Delayed::PerformableMethod.new(@model, :to_s, [])
-        error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, @model._id)
+        error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, nil, [ @model.id ])
         TestModel.should_receive(:find).with(@model._id.to_s).and_raise(error)
         method.perform.should be_true
       end
+      it "should do nothing if document find returned nil" do
+        method = ::Delayed::PerformableMethod.new(@model, :to_s, [])
+        @model.destroy
+        TestModel.should_receive(:find).with(@model._id.to_s).and_return(nil)
+        method.perform.should be_true
+      end
       it "should find embedded document" do
-        child = ChildModel.new(:_id => ::BSON::ObjectId.new)
+        child = ChildModel.new(:_id => Moped::BSON::ObjectId.new)
         @model.child_models.push child
         method = ::Delayed::PerformableMethod.new(child, :to_s, [])
         TestModel.should_receive(:find).with(@model._id.to_s).and_return(@model)
         method.perform
       end
     end
-    
+
     context "display_name" do
       it "should return underlying class when a stub is being used" do
         method = ::Delayed::PerformableMethod.new(@model, :to_s, [])
@@ -122,7 +128,7 @@ describe ::Delayed::PerformableMethod do
         method.display_name.should == "Symbol#to_s"
       end
       it "should include selector when document is embedded" do
-        child = ChildModel.new(:_id => ::BSON::ObjectId.new)
+        child = ChildModel.new(:_id => Moped::BSON::ObjectId.new)
         @model.child_models.push child
         method = ::Delayed::PerformableMethod.new(child, :to_s, [])
         method.display_name.should == "TestModel[#{@model._id}].child_models.find(\"#{child._id}\")#to_s"
@@ -146,7 +152,7 @@ describe ::Delayed::PerformableMailer do
       @mailer.perform
     end
     it "should do nothing if an argument document is not found" do
-      error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, @model._id)
+      error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, nil, [ @model._id ])
       TestModel.should_receive(:find).with(@model._id.to_s).and_raise(error)
       @mailer.perform.should be_true
     end
@@ -154,7 +160,7 @@ describe ::Delayed::PerformableMailer do
   context "failing mailer from bad record" do
     before do
       @model = TestModel.create
-      error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, @model._id)
+      error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, nil, [ @model._id ])
       @email = mock('email')
       @email.stub(:deliver).and_raise(error)
       @mailer_class = mock('MailerClass', :signup => @email)
