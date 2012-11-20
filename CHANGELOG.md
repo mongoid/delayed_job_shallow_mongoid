@@ -1,3 +1,8 @@
+0.5.1
+-----
+
+* [#4](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/4): Fix: `const_missing: uninitialized constant Delayed::DelayMail (NameError)` - [@dblock](http://github.com/dblock).
+
 0.5.0
 -----
 
