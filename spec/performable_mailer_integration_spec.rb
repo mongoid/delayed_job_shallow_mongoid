@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-require 'spec_helper'
-
 describe Delayed::PerformableMailer do
   it "queues and delivers a delayed mail" do
     expect {
