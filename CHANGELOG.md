@@ -1,3 +1,9 @@
+0.5.1
+-----
+
+* [#4](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/4): Fix: `const_missing: uninitialized constant Delayed::DelayMail (NameError)` with Rails - [@dblock](http://github.com/dblock).
+* [#4](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/4): Fix: do not run job when a Mongoid instance is not found within delayed_job arguments and `Mongoid.raise_not_found_error` is set to `false` - [@dblock](http://github.com/dblock).
+
 0.5.0
 -----
 

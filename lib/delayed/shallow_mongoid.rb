@@ -1,5 +1,11 @@
 module Delayed
   module ShallowMongoid
+
+    module Errors
+      class DocumentNotFound < StandardError
+      end
+    end
+
     def self.dump(arg)
       return arg unless arg.is_a?(::Mongoid::Document) && arg.persisted?
       return arg if arg._updates.any? && !Delayed::Worker.delay_jobs
@@ -9,16 +15,22 @@ module Delayed
         ShallowMongoid::DocumentStub.new(arg.class, arg._id.to_s)
       end
     end
-  
+
     def self.load(arg)
       return arg unless arg.is_a?(ShallowMongoid::DocumentStub)
-      result = arg.klass.find(arg.id)
+      begin
+        result = arg.klass.find(arg.id)
+        raise Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
+      rescue Mongoid::Errors::DocumentNotFound
+        raise Delayed::ShallowMongoid::Errors::DocumentNotFound
+      end
       (arg.selector || []).each do |message|
         result = result.send(*message)
       end
+      raise Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
       result
     end
-  
+
     # The chain of relations allowing us to locate an embedded document.
     # E.g., ['images', ['find', '4eef..678'], 'width']
     def self.selector_from(doc)
