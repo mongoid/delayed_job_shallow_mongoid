@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "delayed_job_shallow_mongoid.gemspec",
-    "lib/delayed/performable_mailer.rb",
     "lib/delayed/shallow_mongoid.rb",
     "lib/delayed/shallow_mongoid/document_stub.rb",
     "lib/delayed/shallow_mongoid/performable_mailer.rb",
