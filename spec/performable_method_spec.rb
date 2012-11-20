@@ -11,7 +11,7 @@ describe ::Delayed::PerformableMethod do
 
   context "with a saved document" do
     before(:each) do
-      @model = TestModel.create #new(:_id => Moped::BSON::ObjectId.new)
+      @model = TestModel.create!
     end
 
     context 'when saving job' do

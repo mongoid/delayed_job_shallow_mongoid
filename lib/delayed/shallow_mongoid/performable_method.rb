@@ -11,14 +11,11 @@ module Delayed
     end
 
     def perform
-      begin
-        klass = ShallowMongoid.load(object)
-        return true unless klass
-        delayed_arguments = *args.map{|a| ShallowMongoid.load(a) }
-      rescue Mongoid::Errors::DocumentNotFound
-        return true  # do nothing if document has been removed
-      end
+      klass = ShallowMongoid.load(object)
+      delayed_arguments = *args.map{|a| ShallowMongoid.load(a) }
       klass.send(method_name, *delayed_arguments)
+    rescue Delayed::ShallowMongoid::Errors::DocumentNotFound
+      return true  # do nothing if document has been removed
     end
 
     def display_name

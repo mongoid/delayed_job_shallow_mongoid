@@ -22,6 +22,7 @@ describe ::Delayed::PerformableMailer do
     it "does nothing if an argument document is nil" do
       error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, nil, [ @model._id ])
       TestModel.should_receive(:find).with(@model._id.to_s).and_return(nil)
+      Mail::Message.any_instance.should_not_receive(:deliver)
       @mailer.perform.should be_true
     end
   end
