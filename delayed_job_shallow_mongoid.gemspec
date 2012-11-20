@@ -27,9 +27,7 @@ Gem::Specification.new do |s|
     "lib/delayed/shallow_mongoid/document_stub.rb",
     "lib/delayed/shallow_mongoid/performable_mailer.rb",
     "lib/delayed/shallow_mongoid/performable_method.rb",
-    "lib/delayed_job_shallow_mongoid.rb",
-    "spec/delayed_job_shallow_mongoid_spec.rb",
-    "spec/spec_helper.rb"
+    "lib/delayed_job_shallow_mongoid.rb"
   ]
   s.homepage = "http://github.com/joeyAghion/delayed_job_shallow_mongoid"
   s.licenses = ["MIT"]
