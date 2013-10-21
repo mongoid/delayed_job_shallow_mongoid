@@ -36,7 +36,7 @@ describe ::Delayed::PerformableMethod do
       end
       context "with an embedded document" do
         before(:each) do
-          @child = ChildModel.new(:_id => Moped::BSON::ObjectId.new)
+          @child = ChildModel.new
           @model.child_models.push @child
         end
         after(:each) do
@@ -49,7 +49,7 @@ describe ::Delayed::PerformableMethod do
           @method.object.selector.should == ['child_models', ['find', @child._id.to_s]]
         end
         it "stores the deeply nested selector" do
-          @grandchild = GrandchildModel.new(:_id => Moped::BSON::ObjectId.new)
+          @grandchild = GrandchildModel.new
           @model.child_models.first.grandchild_models.push @grandchild
           @method = ::Delayed::PerformableMethod.new(@grandchild, :to_s, [])
           @method.object.selector.should == ['child_models', ['find', @child._id.to_s], 'grandchild_models', ['find', @grandchild._id.to_s]]
@@ -76,7 +76,7 @@ describe ::Delayed::PerformableMethod do
         method.perform.should be_true
       end
       it "finds embedded document" do
-        child = ChildModel.new(:_id => Moped::BSON::ObjectId.new)
+        child = ChildModel.new
         @model.child_models.push child
         method = ::Delayed::PerformableMethod.new(child, :to_s, [])
         TestModel.should_receive(:find).with(@model._id.to_s).and_return(@model)
@@ -94,7 +94,7 @@ describe ::Delayed::PerformableMethod do
         method.display_name.should == "Symbol#to_s"
       end
       it "includes selector when document is embedded" do
-        child = ChildModel.new(:_id => Moped::BSON::ObjectId.new)
+        child = ChildModel.new
         @model.child_models.push child
         method = ::Delayed::PerformableMethod.new(child, :to_s, [])
         method.display_name.should == "TestModel[#{@model._id}].child_models.find(\"#{child._id}\")#to_s"

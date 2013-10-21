@@ -37,9 +37,9 @@ Gem::Specification.new do |s|
   s.summary = "More efficient Mongoid document serialization for delayed_job."
 
   s.specification_version = 3
-  s.add_runtime_dependency(%q<delayed_job>, ["~> 3.0"])
-  s.add_runtime_dependency(%q<delayed_job_mongoid>, ["~> 2.0"])
-  s.add_runtime_dependency(%q<mongoid>, ["~> 3.0"])
+  s.add_runtime_dependency(%q<delayed_job>, [">= 3.0"])
+  s.add_runtime_dependency(%q<delayed_job_mongoid>, [">= 2.0"])
+  s.add_runtime_dependency(%q<mongoid>, [">= 3.0"])
   s.add_development_dependency(%q<actionmailer>, [">= 0"])
   s.add_development_dependency(%q<shoulda>, [">= 0"])
   s.add_development_dependency(%q<rake>, ["~> 10.0"])

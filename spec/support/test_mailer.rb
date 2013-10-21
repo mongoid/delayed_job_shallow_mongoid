@@ -7,6 +7,9 @@ class TestMailer < ActionMailer::Base
       to: "bob@example.com",
       subject: "reticulated spline",
       spline: spline ? 'yes' : 'no'
-    })
+    }) do |format|
+      format.text { render text: 'A spline has been reticulated.' }
+    end
   end
+
 end

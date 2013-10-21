@@ -4,8 +4,8 @@ describe ::Delayed::PerformableMailer do
   context "successful mailer" do
     before do
       @model = TestModel.create
-      @email = mock('email', :deliver => true)
-      @mailer_class = mock('MailerClass', :signup => @email)
+      @email = double('email', :deliver => true)
+      @mailer_class = double('MailerClass', :signup => @email)
       @mailer = ::Delayed::PerformableMailer.new(@mailer_class, :signup, [@model])
     end
     it "calls the method and #deliver on the mailer" do
@@ -30,9 +30,9 @@ describe ::Delayed::PerformableMailer do
     before do
       @model = TestModel.create
       error = ::Mongoid::Errors::DocumentNotFound.new(TestModel, nil, [ @model._id ])
-      @email = mock('email')
+      @email = double('email')
       @email.stub(:deliver).and_raise(error)
-      @mailer_class = mock('MailerClass', :signup => @email)
+      @mailer_class = double('MailerClass', :signup => @email)
       @mailer = ::Delayed::PerformableMailer.new(@mailer_class, :signup, [@model])
     end
     it "fails if an exception comes up" do

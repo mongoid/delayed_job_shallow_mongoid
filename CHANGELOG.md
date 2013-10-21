@@ -1,3 +1,8 @@
+Next Release
+------------
+
+* Fixed compatibility with Mongoid 4.x and DelayedJob 4.x - [@dblock](http://github.com/dblock).
+
 0.5.1
 -----
 
