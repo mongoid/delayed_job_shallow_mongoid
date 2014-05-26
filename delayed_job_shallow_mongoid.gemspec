@@ -44,6 +44,5 @@ Gem::Specification.new do |s|
   s.add_development_dependency(%q<shoulda>, [">= 0"])
   s.add_development_dependency(%q<rake>, ["~> 10.0"])
   s.add_development_dependency(%q<rspec>, [">= 0"])
-  s.add_development_dependency(%q<ruby-debug19>, [">= 0"])
 end
 
