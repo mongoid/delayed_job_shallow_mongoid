@@ -10,14 +10,14 @@ module Delayed
       return arg unless arg.is_a?(::Mongoid::Document) && arg.persisted?
       return arg if arg._updates.any? && !Delayed::Worker.delay_jobs
       if arg.embedded?
-        ShallowMongoid::DocumentStub.new(arg._root.class, arg._root._id.to_s, selector_from(arg))
+        Delayed::ShallowMongoid::DocumentStub.new(arg._root.class, arg._root._id.to_s, selector_from(arg))
       else
-        ShallowMongoid::DocumentStub.new(arg.class, arg._id.to_s)
+        Delayed::ShallowMongoid::DocumentStub.new(arg.class, arg._id.to_s)
       end
     end
 
     def self.load(arg)
-      return arg unless arg.is_a?(ShallowMongoid::DocumentStub)
+      return arg unless arg.is_a?(Delayed::ShallowMongoid::DocumentStub)
       begin
         result = arg.klass.find(arg.id)
         raise Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
@@ -36,8 +36,8 @@ module Delayed
     def self.selector_from(doc)
       [].tap do |selector|
         while doc._parent do
-          selector.unshift ['find', doc._id.to_s] if doc.metadata.macro == :embeds_many
-          selector.unshift doc.metadata.key
+          selector.unshift ['find', doc._id.to_s] if Delayed::ShallowMongoid.metadata(doc).macro == :embeds_many
+          selector.unshift Delayed::ShallowMongoid.metadata(doc).key
           doc = doc._parent
         end
       end

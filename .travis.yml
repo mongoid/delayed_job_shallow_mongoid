@@ -1,5 +1,16 @@
-language: ruby
 services: mongodb
-rvm:
-  - 1.9.3
 
+language: ruby
+
+cache: bundler
+
+rvm:
+  - 2.1.1
+  - 2.0.0
+  - 1.9.3
+  - rbx-2
+  - jruby-19mode
+
+env:
+  - MONGOID_VERSION=3
+  - MONGOID_VERSION=4

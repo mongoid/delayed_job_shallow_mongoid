@@ -5,7 +5,7 @@ end
 RSpec.configure do |config|
   config.before(:each) do
     Mongoid.purge!
-    Mongoid::IdentityMap.clear
+    Mongoid::IdentityMap.clear if Delayed::ShallowMongoid.mongoid3?
   end
   config.after(:all) do
     Mongoid.default_session.drop
