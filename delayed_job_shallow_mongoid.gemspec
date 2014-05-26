@@ -40,6 +40,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency(%q<delayed_job>, [">= 3.0"])
   s.add_runtime_dependency(%q<delayed_job_mongoid>, [">= 2.0"])
   s.add_runtime_dependency(%q<mongoid>, [">= 3.0"])
+  s.add_runtime_dependency(%q<activesupport>, [">= 3.2"])
   s.add_development_dependency(%q<actionmailer>, [">= 0"])
   s.add_development_dependency(%q<shoulda>, [">= 0"])
   s.add_development_dependency(%q<rake>, ["~> 10.0"])
