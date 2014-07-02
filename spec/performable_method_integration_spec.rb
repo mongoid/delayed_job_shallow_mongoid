@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe Delayed::PerformableMethod do
-  context "model" do
+  context 'model' do
     before :each do
       @model = TestModel.create!
     end
-    it "queues and runs a delayed job" do
-      expect {
+    it 'queues and runs a delayed job' do
+      expect do
         @model.delay.reticulate!
-      }.to change(Delayed::Job, :count).by(1)
+      end.to change(Delayed::Job, :count).by(1)
       job = Delayed::Job.last
       expect(job.payload_object.class).to eq(Delayed::PerformableMethod)
       expect(job.payload_object.object.class).to eq(Delayed::ShallowMongoid::DocumentStub)
@@ -17,8 +17,8 @@ describe Delayed::PerformableMethod do
       expect_any_instance_of(TestModel).to receive(:reticulate!).once
       expect(Delayed::Worker.new.work_off).to eq([1, 0])
     end
-    context "without args" do
-      it "ignores deleted models when find raises Mongoid::Errors::DocumentNotFound" do
+    context 'without args' do
+      it 'ignores deleted models when find raises Mongoid::Errors::DocumentNotFound' do
         expect_any_instance_of(TestModel).to receive(:reticulate!).never
         @model.delay.reticulate!
         @model.destroy
@@ -31,11 +31,11 @@ describe Delayed::PerformableMethod do
         expect(Delayed::Worker.new.work_off).to eq([1, 0])
       end
     end
-    context "with args" do
+    context 'with args' do
       before :each do
         @arg = TestModel.create!
       end
-      it "ignores deleted models when find raises Mongoid::Errors::DocumentNotFound" do
+      it 'ignores deleted models when find raises Mongoid::Errors::DocumentNotFound' do
         @model.delay.reticulate!(@arg)
         @arg.destroy
         expect_any_instance_of(TestModel).to receive(:reticulate!).never

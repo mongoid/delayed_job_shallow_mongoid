@@ -4,7 +4,7 @@ module Delayed
       ::Mongoid.const_defined? :Observer # deprecated in Mongoid 4.x
     end
 
-    def self.metadata instance
+    def self.metadata(instance)
       if Delayed::ShallowMongoid.mongoid3?
         instance.metadata
       else

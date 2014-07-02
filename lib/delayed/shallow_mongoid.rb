@@ -1,6 +1,5 @@
 module Delayed
   module ShallowMongoid
-
     module Errors
       class DocumentNotFound < StandardError
       end
@@ -20,14 +19,14 @@ module Delayed
       return arg unless arg.is_a?(Delayed::ShallowMongoid::DocumentStub)
       begin
         result = arg.klass.find(arg.id)
-        raise Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
+        fail Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
       rescue Mongoid::Errors::DocumentNotFound
         raise Delayed::ShallowMongoid::Errors::DocumentNotFound
       end
       (arg.selector || []).each do |message|
         result = result.send(*message)
       end
-      raise Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
+      fail Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
       result
     end
 
@@ -35,7 +34,7 @@ module Delayed
     # E.g., ['images', ['find', '4eef..678'], 'width']
     def self.selector_from(doc)
       [].tap do |selector|
-        while doc._parent do
+        while doc._parent
           selector.unshift ['find', doc._id.to_s] if Delayed::ShallowMongoid.metadata(doc).macro == :embeds_many
           selector.unshift Delayed::ShallowMongoid.metadata(doc).key
           doc = doc._parent
