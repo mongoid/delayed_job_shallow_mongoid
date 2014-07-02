@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.md"
   ]
-  s.files = [
+  s.files = Dir[
     ".document",
     ".travis.yml",
     "CHANGELOG.md",
@@ -24,12 +24,7 @@ Gem::Specification.new do |s|
     "README.md",
     "Rakefile",
     "delayed_job_shallow_mongoid.gemspec",
-    "lib/delayed/shallow_mongoid.rb",
-    "lib/delayed/shallow_mongoid/document_stub.rb",
-    "lib/delayed/shallow_mongoid/performable_mailer.rb",
-    "lib/delayed/shallow_mongoid/performable_method.rb",
-    "lib/delayed/shallow_mongoid/version.rb",
-    "lib/delayed_job_shallow_mongoid.rb"
+    'lib/**/*'
   ]
   s.homepage = "http://github.com/joeyAghion/delayed_job_shallow_mongoid"
   s.licenses = ["MIT"]
