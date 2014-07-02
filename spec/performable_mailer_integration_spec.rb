@@ -10,8 +10,8 @@ describe Delayed::PerformableMailer do
     expect(job.payload_object.object).to eq(TestMailer)
     expect(job.payload_object.method_name).to eq(:reticulate)
     expect(job.payload_object.args).to eq([])
-    Mail::Message.any_instance.should_receive(:deliver).once
-    Delayed::Worker.new.work_off.should == [1, 0]
+    expect_any_instance_of(Mail::Message).to receive(:deliver).once
+    expect(Delayed::Worker.new.work_off).to eq([1, 0])
   end
   context "with args" do
     before :each do
@@ -22,16 +22,16 @@ describe Delayed::PerformableMailer do
         TestMailer.delay.reticulate(@arg)
       }.to change(Delayed::Job, :count).by(1)
       @arg.destroy
-      Mail::Message.any_instance.should_not_receive(:deliver)
-      Delayed::Worker.new.work_off.should == [1, 0]
+      expect_any_instance_of(Mail::Message).to receive(:deliver).never
+      expect(Delayed::Worker.new.work_off).to eq([1, 0])
     end
     it "ignores deleted models when find doesn't raise an error" do
-      TestModel.should_receive(:find).with(@arg.id.to_s).and_return(nil)
+      expect(TestModel).to receive(:find).with(@arg.id.to_s).and_return(nil)
       expect {
         TestMailer.delay.reticulate(@arg)
       }.to change(Delayed::Job, :count).by(1)
-      Mail::Message.any_instance.should_not_receive(:deliver)
-      Delayed::Worker.new.work_off.should == [1, 0]
+      expect_any_instance_of(Mail::Message).to receive(:deliver).never
+      expect(Delayed::Worker.new.work_off).to eq([1, 0])
     end
   end
 end
