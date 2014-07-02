@@ -1,3 +1,8 @@
+1.0.1 (2014-07-02)
+------------------
+
+* Fixed missing file in .gemspec - [@dblock](http://github.com/dblock).
+
 1.0.0 (2014-07-01)
 ------------------
 
