@@ -3,16 +3,16 @@ module Delayed
     attr_accessor :object, :method_name, :args
 
     def initialize(object, method_name, args)
-      raise NoMethodError, "undefined method `#{method_name}' for #{object.inspect}" unless object.respond_to?(method_name, true)
+      fail NoMethodError, "undefined method `#{method_name}' for #{object.inspect}" unless object.respond_to?(method_name, true)
 
       self.object       = ShallowMongoid.dump(object)
-      self.args         = args.map{|a| ShallowMongoid.dump(a) }
+      self.args         = args.map { |a| ShallowMongoid.dump(a) }
       self.method_name  = method_name.to_sym
     end
 
     def perform
       klass = ShallowMongoid.load(object)
-      delayed_arguments = *args.map{|a| ShallowMongoid.load(a) }
+      delayed_arguments = *args.map { |a| ShallowMongoid.load(a) }
       klass.send(method_name, *delayed_arguments)
     rescue Delayed::ShallowMongoid::Errors::DocumentNotFound
       return true  # do nothing if document has been removed
