@@ -17,3 +17,5 @@ Encoding:
   # no need to always specify encoding
   Enabled: false
 
+Metrics/AbcSize:
+  Enabled: false

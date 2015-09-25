@@ -1,6 +1,6 @@
 module Delayed
   module ShallowMongoid
-    class DocumentStub < Struct.new(:klass, :id, :selector)
+    DocumentStub = Struct.new(:klass, :id, :selector) do
       def description
         "#{klass}[#{id}]".tap do |desc|
           desc << '.' + selector.map do |s|
