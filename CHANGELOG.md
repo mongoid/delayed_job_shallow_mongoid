@@ -1,6 +1,7 @@
 Next
 ----
 
+* [#11](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/11): Support Mongoid 5 - [@dblock](http://github.com/dblock).
 * [#10](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/10): Added Rubocop, Ruby style linter - [@dblock](http://github.com/dblock).
 
 1.0.1 (2014-07-02)
