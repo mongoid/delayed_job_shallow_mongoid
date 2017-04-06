@@ -4,15 +4,32 @@ language: ruby
 
 cache: bundler
 
+before_install: gem update bundler --no-document
+
 rvm:
-  - 2.2
-  - 2.1.2
+  - 2.4.1
+  - 2.3.4
+  - 2.2.7
+  - 2.1.9
   - 2.0.0
   - 1.9.3
-  - rbx-2
-  - jruby-19mode
+  - jruby-9.1.8.0
 
 env:
   - MONGOID_VERSION=3
   - MONGOID_VERSION=4
   - MONGOID_VERSION=5
+  - MONGOID_VERSION=6
+
+matrix:
+  exclude:
+    - rvm: 2.1.9
+      env: MONGOID_VERSION=6
+    - rvm: 2.0.0
+      env: MONGOID_VERSION=5
+    - rvm: 2.0.0
+      env: MONGOID_VERSION=6
+    - rvm: 1.9.3
+      env: MONGOID_VERSION=5
+    - rvm: 1.9.3
+      env: MONGOID_VERSION=6
