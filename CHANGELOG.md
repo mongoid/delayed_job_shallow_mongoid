@@ -1,7 +1,7 @@
 1.2.0 (Next)
 ------------
 
-* Your contribution here.
+* [#12](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/12): Support Mongoid 6 - [@yuki24](https://github.com/yuki24).
 
 1.1.0 (2015-09-25)
 ------------------
