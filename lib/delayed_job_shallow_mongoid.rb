@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'delayed_job'
 require 'delayed/shallow_mongoid'
 require 'delayed/shallow_mongoid/version'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Delayed
   module ShallowMongoid
     def self.mongoid3?
@@ -7,6 +9,8 @@ module Delayed
     def self.metadata(instance)
       if Delayed::ShallowMongoid.mongoid3?
         instance.metadata
+      elsif instance.respond_to?(:_association)
+        instance._association
       else
         instance.relation_metadata
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Delayed
   module ShallowMongoid
     module Errors
@@ -8,6 +10,7 @@ module Delayed
     def self.dump(arg)
       return arg unless arg.is_a?(::Mongoid::Document) && arg.persisted?
       return arg if arg._updates.any? && !Delayed::Worker.delay_jobs
+
       if arg.embedded?
         Delayed::ShallowMongoid::DocumentStub.new(arg._root.class, arg._root._id.to_s, selector_from(arg))
       else
@@ -17,16 +20,19 @@ module Delayed
 
     def self.load(arg)
       return arg unless arg.is_a?(Delayed::ShallowMongoid::DocumentStub)
+
       begin
         result = arg.klass.find(arg.id)
-        fail Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
+        raise Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
+
+        (arg.selector || []).each do |message|
+          result = result.send(*message)
+          raise Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
+        end
       rescue Mongoid::Errors::DocumentNotFound
         raise Delayed::ShallowMongoid::Errors::DocumentNotFound
       end
-      (arg.selector || []).each do |message|
-        result = result.send(*message)
-      end
-      fail Delayed::ShallowMongoid::Errors::DocumentNotFound unless result
+
       result
     end
 
@@ -35,8 +41,14 @@ module Delayed
     def self.selector_from(doc)
       [].tap do |selector|
         while doc._parent
-          selector.unshift ['find', doc._id.to_s] if Delayed::ShallowMongoid.metadata(doc).macro == :embeds_many
-          selector.unshift Delayed::ShallowMongoid.metadata(doc).key
+          association = Delayed::ShallowMongoid.metadata(doc)
+          many = if association.respond_to?(:macro)
+                   association.macro == :embeds_many
+                 else
+                   association.is_a?(::Mongoid::Association::Embedded::EmbedsMany)
+                 end
+          selector.unshift ['find', doc._id.to_s] if many
+          selector.unshift association.key
           doc = doc._parent
         end
       end

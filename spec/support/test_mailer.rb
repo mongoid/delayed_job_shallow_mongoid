@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TestMailer < ActionMailer::Base
   default from: 'William Bell <bill@example.com>'
 
@@ -8,7 +10,7 @@ class TestMailer < ActionMailer::Base
       subject: 'reticulated spline',
       spline: spline ? 'yes' : 'no'
     ) do |format|
-      format.text { render text: 'A spline has been reticulated.' }
+      format.text { render plain: 'A spline has been reticulated.' }
     end
   end
 end

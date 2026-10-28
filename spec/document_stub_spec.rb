@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Delayed::ShallowMongoid::DocumentStub do
@@ -14,7 +16,7 @@ describe Delayed::ShallowMongoid::DocumentStub do
     expect(@shallow.selector).to be_nil
   end
   it 'can have an actual selector' do
-    @shallow = Delayed::ShallowMongoid::DocumentStub.new(TestModel, 111, [:a, :b])
-    expect(@shallow.selector).to eq([:a, :b])
+    @shallow = Delayed::ShallowMongoid::DocumentStub.new(TestModel, 111, %i[a b])
+    expect(@shallow.selector).to eq(%i[a b])
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe Delayed::PerformableMethod do
@@ -14,8 +16,38 @@ describe Delayed::PerformableMethod do
       expect(job.payload_object.object.class).to eq(Delayed::ShallowMongoid::DocumentStub)
       expect(job.payload_object.method_name).to eq(:reticulate!)
       expect(job.payload_object.args).to eq([])
-      expect_any_instance_of(TestModel).to receive(:reticulate!).once
       expect(Delayed::Worker.new.work_off).to eq([1, 0])
+      expect(@model.reload.reticulated).to be true
+    end
+
+    it 'ignores an embedded document removed before the job runs' do
+      child = @model.child_models.create!
+      child.delay.to_s
+      child.destroy
+
+      expect(Delayed::Worker.new.work_off).to eq([1, 0])
+      expect(Delayed::Job.count).to eq(0)
+    end
+
+    it 'ignores a nested document whose parent was removed before the job runs' do
+      child = @model.child_models.create!
+      grandchild = child.grandchild_models.create!
+      grandchild.delay.to_s
+      child.destroy
+
+      expect(Delayed::Worker.new.work_off).to eq([1, 0])
+      expect(Delayed::Job.count).to eq(0)
+    end
+
+    it 'ignores a missing embedded parent when lookups return nil' do
+      allow(Mongoid).to receive(:raise_not_found_error).and_return(false)
+      child = @model.child_models.create!
+      grandchild = child.grandchild_models.create!
+      grandchild.delay.to_s
+      child.destroy
+
+      expect(Delayed::Worker.new.work_off).to eq([1, 0])
+      expect(Delayed::Job.count).to eq(0)
     end
     context 'without args' do
       it 'ignores deleted models when find raises Mongoid::Errors::DocumentNotFound' do
