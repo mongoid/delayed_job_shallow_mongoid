@@ -35,6 +35,7 @@ Contributions
 -------------
 
 * Contributions encouraged. Feature branches appreciated.
+* Add user-facing changes to the next release in `CHANGELOG.md`, linking the issue or pull request and crediting the contributor. Danger checks new and edited entries without reformatting historical releases, and reminds contributors to update the changelog; README-only changes are exempt. Changelog review runs separately on Ruby 3.4 and publishes a report on pull requests, including forks, using GitHub's built-in token; no personal access token or shared Mongoid Danger gem is required.
 * Development generously supported by [Artsy](https://www.artsy.net).
 
 Copyright

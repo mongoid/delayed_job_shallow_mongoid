@@ -1,10 +1,12 @@
 1.3.0 (Next)
 ------------
 
-* Add GitHub Actions compatibility testing for Mongoid 6-9, Ruby 2.7/3.3/3.4/4.0, and compatible Rails versions, replacing Travis CI.
-* Add line/branch coverage, HTML/LCOV reports, and Coveralls reporting.
-* Support current Mongoid embedded-association metadata and skip jobs whose embedded documents were removed before execution.
-* Refresh development dependencies, RuboCop, gem metadata, and contributor documentation. Require Ruby 2.7 or newer.
+* Your contribution here.
+* [#19](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/19): Add Danger changelog review and fork-safe pull request comments through GitHub Actions - [@dblock](https://github.com/dblock).
+* [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Add GitHub Actions compatibility testing for Mongoid 6-9, Ruby 2.7/3.3/3.4/4.0, and compatible Rails versions, replacing Travis CI - [@dblock](https://github.com/dblock).
+* [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Add line/branch coverage, HTML/LCOV reports, and Coveralls reporting - [@dblock](https://github.com/dblock).
+* [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Support current Mongoid embedded-association metadata and skip jobs whose embedded documents were removed before execution - [@dblock](https://github.com/dblock).
+* [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Refresh development dependencies, RuboCop, gem metadata, and contributor documentation. Require Ruby 2.7 or newer - [@dblock](https://github.com/dblock).
 
 1.2.0 (2017-04-07)
 ------------
