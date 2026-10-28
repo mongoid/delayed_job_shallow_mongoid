@@ -1,21 +1,24 @@
 AllCops:
-  Excludes:
+  NewCops: enable
+  TargetRubyVersion: 2.7
+  Exclude:
     - vendor/**/*
     - bin/**/*
 
-LineLength:
+Layout/LineLength:
   Enabled: false
 
-MethodLength:
+Metrics/MethodLength:
   Enabled: false
 
-Documentation:
+Style/Documentation:
   # don't require classes to be documented
-  Enabled: false
-
-Encoding:
-  # no need to always specify encoding
   Enabled: false
 
 Metrics/AbcSize:
   Enabled: false
+
+Metrics/BlockLength:
+  AllowedMethods:
+    - describe
+    - context

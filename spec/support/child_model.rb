@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChildModel
   include ::Mongoid::Document
 

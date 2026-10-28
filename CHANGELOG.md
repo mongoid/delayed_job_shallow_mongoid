@@ -1,7 +1,10 @@
 1.3.0 (Next)
 ------------
 
-* Your contribution here.
+* Add GitHub Actions compatibility testing for Mongoid 6-9, Ruby 2.7/3.3/3.4/4.0, and compatible Rails versions, replacing Travis CI.
+* Add line/branch coverage, HTML/LCOV reports, and Coveralls reporting.
+* Support current Mongoid embedded-association metadata and skip jobs whose embedded documents were removed before execution.
+* Refresh development dependencies, RuboCop, gem metadata, and contributor documentation. Require Ruby 2.7 or newer.
 
 1.2.0 (2017-04-07)
 ------------

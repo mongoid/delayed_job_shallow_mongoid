@@ -1,0 +1,79 @@
+name: Tests
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Ruby ${{ matrix.ruby }} / Mongoid ${{ matrix.mongoid }} / Rails ${{ matrix.rails }}
+    runs-on: ubuntu-22.04
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { ruby: '2.7', mongoid: '~> 6.0', rails: '~> 5.2', mongodb: '4.4' }
+          - { ruby: '2.7', mongoid: '~> 7.0', rails: '~> 6.1', mongodb: '4.4' }
+          - { ruby: '3.3', mongoid: '~> 8.1', rails: '~> 7.2', mongodb: '8.0' }
+          - { ruby: '3.3', mongoid: '~> 9.0', rails: '~> 7.2', mongodb: '8.0' }
+          - { ruby: '3.4', mongoid: '~> 8.1', rails: '~> 8.0.0', mongodb: '8.0' }
+          - { ruby: '3.4', mongoid: '~> 9.0', rails: '~> 8.1', mongodb: '8.0' }
+          - { ruby: '4.0', mongoid: '~> 9.0', rails: '~> 8.1', mongodb: '8.0' }
+    env:
+      MONGOID_VERSION: ${{ matrix.mongoid }}
+      RAILS_VERSION: ${{ matrix.rails }}
+      MONGODB_URI: mongodb://127.0.0.1:27017/delayed_job_shallow_mongoid_test
+    services:
+      mongodb:
+        image: mongo:${{ matrix.mongodb }}
+        ports: ['27017:27017']
+        options: >-
+          --health-cmd "mongosh --quiet --eval 'db.adminCommand({ping: 1})' || mongo --quiet --eval 'db.adminCommand({ping: 1})'"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+          bundler: ${{ matrix.ruby == '2.7' && '2.4.22' || '2.6.9' }}
+          bundler-cache: true
+      - run: bundle exec rake spec
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: coverage/lcov.info
+          format: lcov
+          flag-name: combination-${{ strategy.job-index }}
+          parallel: true
+          fail-on-error: true
+      - name: Upload coverage
+        if: ${{ always() && hashFiles('coverage/lcov.info') != '' }}
+        uses: actions/upload-artifact@v7
+        with:
+          name: coverage-ruby-${{ matrix.ruby }}-${{ strategy.job-index }}
+          path: coverage/
+
+  coverage:
+    name: Finish Coveralls
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true
+          fail-on-error: true
