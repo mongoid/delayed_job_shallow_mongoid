@@ -1,7 +1,6 @@
-1.3.0 (Next)
-------------
+1.3.0 (2026-10-28)
+------------------
 
-* Your contribution here.
 * [#19](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/19): Add Danger changelog review and fork-safe pull request comments through GitHub Actions - [@dblock](https://github.com/dblock).
 * [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Add GitHub Actions compatibility testing for Mongoid 6-9, Ruby 2.7/3.3/3.4/4.0, and compatible Rails versions, replacing Travis CI - [@dblock](https://github.com/dblock).
 * [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Add line/branch coverage, HTML/LCOV reports, and Coveralls reporting - [@dblock](https://github.com/dblock).
