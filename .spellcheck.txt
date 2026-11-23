@@ -12,12 +12,14 @@ commit's
 config
 dblock
 DelayedJob
+DelayedJobShallowMongoidRelease
 DocumentNotFound
 Doubrovkine
 Gemfile
 gemspec
 Intial
 joeyAghion
+JRuby
 klass
 LCOV
 lcov
@@ -34,6 +36,7 @@ OTPs
 Rakefile
 rb
 README
+RSpec
 RuboCop
 RubyGems
 Setext
