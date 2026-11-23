@@ -2,7 +2,7 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'delayed/shallow_mongoid/version'
+require_relative 'lib/delayed/shallow_mongoid/version'
 
 Gem::Specification.new do |s|
   s.name = 'delayed_job_shallow_mongoid'

@@ -1,13 +1,12 @@
-1.3.1 (Next)
-------------
+### 1.3.1 (Next)
 
 * [#24](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/24): Upgrade danger-pr-comment to 0.3.0 from the `danger` organization and skip empty Danger report comments - [@dblock](https://github.com/dblock).
 * Your contribution here.
 * [#20](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/20): Lint Markdown, YAML, and spelling with rubocop-md, rubocop-prose, rubocop-spellcheck, and rubocop-yaml in a separate Lint workflow, and clean up documentation - [@dblock](https://github.com/dblock).
 * [#21](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/21): Run CI pushes only on the default branch, cancel superseded pull request runs, skip duplicate lint in the test matrix, and bound job times - [@dblock](https://github.com/dblock).
+* [#22](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/22): Release with ruby-gem-release from a manually dispatched GitHub Actions workflow using RubyGems Trusted Publishing, with dry runs - [@dblock](https://github.com/dblock).
 
-1.3.0 (2026-10-28)
-------------------
+### 1.3.0 (2026-10-28)
 
 * [#19](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/19): Add Danger changelog review and fork-safe pull request comments through GitHub Actions - [@dblock](https://github.com/dblock).
 * [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Add GitHub Actions compatibility testing for Mongoid 6-9, Ruby 2.7/3.3/3.4/4.0, and compatible Rails versions, replacing Travis CI - [@dblock](https://github.com/dblock).
@@ -15,66 +14,54 @@
 * [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Support current Mongoid embedded-association metadata and skip jobs whose embedded documents were removed before execution - [@dblock](https://github.com/dblock).
 * [#18](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/18): Refresh development dependencies, RuboCop, gem metadata, and contributor documentation. Require Ruby 2.7 or newer - [@dblock](https://github.com/dblock).
 
-1.2.0 (2017-04-07)
-------------
+### 1.2.0 (2017-04-07)
 
 * [#12](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/12): Support Mongoid 6 - [@yuki24](https://github.com/yuki24).
 
-1.1.0 (2015-09-25)
-------------------
+### 1.1.0 (2015-09-25)
 
 * [#11](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/11): Support Mongoid 5 - [@dblock](http://github.com/dblock).
 * [#10](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/10): Added Rubocop, Ruby style linter - [@dblock](http://github.com/dblock).
 
-1.0.1 (2014-07-02)
-------------------
+### 1.0.1 (2014-07-02)
 
 * Fixed missing file in .gemspec - [@dblock](http://github.com/dblock).
 
-1.0.0 (2014-07-01)
-------------------
+### 1.0.0 (2014-07-01)
 
 * Fixed compatibility with Mongoid 4.x and DelayedJob 4.x - [@dblock](http://github.com/dblock).
 
-0.5.1 (2012-11-20)
-------------------
+### 0.5.1 (2012-11-20)
 
 * [#4](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/4): Fix: `const_missing: uninitialized constant Delayed::DelayMail (NameError)` with Rails - [@dblock](http://github.com/dblock).
 * [#4](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/4): Fix: do not run job when a Mongoid instance is not found within delayed_job arguments and `Mongoid.raise_not_found_error` is set to `false` - [@dblock](http://github.com/dblock).
 
-0.5.0 (2012-11-19)
-------------------
+### 0.5.0 (2012-11-19)
 
 * [#3](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/3): Added Mongoid 3.x support - [@dblock](http://github.com/dblock).
 
-0.4.0 (10/27/2012)
-------------------
+### 0.4.0 (2012-10-27)
 
 * [#2](https://github.com/joeyAghion/delayed_job_shallow_mongoid/pull/2): Silently return on documents that cannot be fetched - [@mixonic](https://github.com/mixonic).
 
-0.3.0 (2/12/2012)
------------------
+### 0.3.0 (2012-02-12)
 
 * Delayed_job 3's requires are no longer relative to its root - [@joeyAghion](https://github.com/joeyAghion).
 * Relaxed requirement for mongoid ~> 2.0 - [@dblock](http://github.com/dblock).
 
-0.2.8 (1/4/2012)
-----------------
+### 0.2.8 (2012-01-04)
 
 * Don't transform object into stub if there are pending updates and jobs are being run immediately - [@joeyAghion](https://github.com/joeyAghion).
 * Don't transform object into stub if not yet persisted - [@joeyAghion](https://github.com/joeyAghion).
 
-0.2.7 (12/19/2011)
-------------------
+### 0.2.7 (2011-12-19)
 
 * Added support for embedded documents - [@joeyAghion](https://github.com/joeyAghion).
 
-0.2.0 (11/29/2011)
-------------------
+### 0.2.0 (2011-11-29)
 
 * Reorganize and fix behavior for mailers - [@joeyAghion](https://github.com/joeyAghion).
 
-0.1.0 (28/11/2011)
-------------------
+### 0.1.0 (2011-11-28)
 
 * Intial public release - [@joeyAghion](https://github.com/joeyAghion).
