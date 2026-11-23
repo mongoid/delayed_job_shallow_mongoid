@@ -1,8 +1,8 @@
-# Releasing delayed_job_shallow_mongoid
+# Releasing `delayed_job_shallow_mongoid`
 
 Publishing requires push access to the canonical `mongoid/delayed_job_shallow_mongoid` repository, RubyGems ownership, and RubyGems multi-factor authentication. Use Ruby 3.3 or newer for the default development bundle.
 
-## Prepare the release
+## Prepare the Release
 
 Start with a clean checkout and confirm that `origin` points to the canonical repository, not a fork:
 
@@ -40,9 +40,9 @@ git commit -m "Prepare delayed_job_shallow_mongoid 1.3.0"
 git push origin master
 ```
 
-Wait for the exact release commit's [Tests](https://github.com/mongoid/delayed_job_shallow_mongoid/actions/workflows/test.yml) and [Rubocop](https://github.com/mongoid/delayed_job_shallow_mongoid/actions/workflows/rubocop.yml) workflows to pass, including every compatibility job and coverage finalization. Danger runs on pull requests, not direct pushes to `master`; require it when preparing a release through a PR.
+Wait for the exact release commit's [Tests](https://github.com/mongoid/delayed_job_shallow_mongoid/actions/workflows/test.yml) and [RuboCop](https://github.com/mongoid/delayed_job_shallow_mongoid/actions/workflows/rubocop.yml) workflows to pass, including every compatibility job and coverage finalization. Danger runs on pull requests, not direct pushes to `master`; require it when preparing a release through a PR.
 
-## Publish and verify
+## Publish and Verify
 
 Confirm that the version is not already published, the version tag does not exist, and the worktree is clean. Immediately before publishing, obtain a fresh RubyGems one-time password from the maintainer. Never reuse a previous release's OTP or write credentials or OTPs into repository files.
 
@@ -68,14 +68,12 @@ gh release create v1.3.0 --repo mongoid/delayed_job_shallow_mongoid \
   --notes-file /path/to/release-notes.txt
 ```
 
-## Prepare the next development version
+## Prepare the Next Development Version
 
 Only after verifying publication, bump the version to the next patch iteration, such as `1.3.1`, and prepend an empty changelog section:
 
 ```markdown
-1.3.1 (Next)
-------------
-
+## 1.3.1 (Next)
 * Your contribution here.
 ```
 

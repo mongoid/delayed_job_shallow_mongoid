@@ -1,24 +1,128 @@
+inherit_from: ".rubocop_todo.yml"
+
+plugins:
+- rubocop-md
+- rubocop-prose
+- rubocop-rake
+- rubocop-spellcheck
+- rubocop-yaml
+
 AllCops:
   NewCops: enable
   TargetRubyVersion: 2.7
   Exclude:
-    - vendor/**/*
-    - bin/**/*
+  - vendor/**/*
+  - bin/**/*
+  - coverage/**/*
+  - pkg/**/*
+  SuggestExtensions: false
+  inherit_mode:
+    merge:
+    - Include
+  Include:
+  - ".github/**/*.yml"
+  - ".rubocop.yml"
 
 Layout/LineLength:
   Enabled: false
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - ".github/workflows/*.yml"
 
 Metrics/MethodLength:
   Enabled: false
 
 Style/Documentation:
-  # don't require classes to be documented
   Enabled: false
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - "**/*.md"
 
 Metrics/AbcSize:
   Enabled: false
 
 Metrics/BlockLength:
   AllowedMethods:
-    - describe
-    - context
+  - describe
+  - context
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - Gemfile
+
+YAML/Lint/InvalidSyntax:
+  Include:
+  - "**/*.yml"
+  - "**/*.yaml"
+
+YAML/Lint/DuplicateKey:
+  Include:
+  - "**/*.yml"
+  - "**/*.yaml"
+
+Naming/FileName:
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - "**/*.md"
+  - ".github/workflows/*.yml"
+
+Style/OneClassPerFile:
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - "**/*.md"
+
+Lint/UselessAssignment:
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - "**/*.md"
+
+Style/MultilineBlockChain:
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - "**/*.md"
+
+Style/SymbolProc:
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - "**/*.md"
+
+Lint/Void:
+  inherit_mode:
+    merge:
+    - Exclude
+  Exclude:
+  - "**/*.md"
+
+Markdown/HeadingCapitalization:
+  Enabled: true
+  Style: title_case
+
+Prose/MaxLength:
+  Max: false
+  Exclude:
+  - LICENSE.txt
+
+Spellcheck:
+  DictionaryFiles:
+    en:
+    - gem:rubocop-spellcheck/data/en/en.dic
+    - ".spellcheck.txt"
+
+Spellcheck/Spelling:
+  Exclude:
+  - LICENSE.txt
