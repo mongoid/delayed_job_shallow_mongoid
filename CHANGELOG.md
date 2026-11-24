@@ -1,3 +1,7 @@
+### 1.3.2 (Next)
+
+* Your contribution here.
+
 ### 1.3.1 (2026-11-24)
 
 * [#24](https://github.com/mongoid/delayed_job_shallow_mongoid/pull/24): Upgrade danger-pr-comment to 0.3.0 from the `danger` organization and skip empty Danger report comments - [@dblock](https://github.com/dblock).
